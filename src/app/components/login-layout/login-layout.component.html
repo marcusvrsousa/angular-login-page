@@ -2,11 +2,17 @@
     <section class="form__container">
         <img src="/assets/svg/logo.svg">
         <h2>{{title}}</h2>
-        <button class="btn-primary">{{primaryButtonText}}</button>
-        <div class="separator">
-            <span>or</span>
+
+        <ng-content></ng-content>
+        <div class="btn-wrapper">
+            <button class="btn-primary">{{primaryButtonText}}</button>
+            <div class="separator">
+                <div></div>
+                <span>or</span>
+                <div></div>
+            </div>
+            <button class="btn-secondary">{{secondaryButtonText}}</button>
         </div>
-        <button class="btn-secondary">{{secondaryButtonText}}</button>
     </section>
 
     <section class="secondary__container">
