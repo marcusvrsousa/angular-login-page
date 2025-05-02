@@ -1,10 +1,27 @@
 <app-login-layout
-    title="Login into yout account"
+    title="Login into your account"
     primaryButtonText="Login Now"
     secondaryButtonText="Sign Up Now"
 >
     <form [formGroup]="loginForm">
-       
+       <app-primary-input
+            [control]="emailControl"
+            type="email"
+            label="Your email"
+            placeholder="johndoe@gmail.com "
+            inputName="email"
+        >
+            <img src="/assets/svg/email-icon.svg" alt="">
+       </app-primary-input>
+       <app-primary-input
+            [control]="passwordControl"
+            type="password"
+            label="Your Password"
+            inputName="password"
+        >
+            <img src="/assets/svg/lock-icon.svg" alt="">
+       </app-primary-input>
+       <span>Forgot password?</span>
     </form>
 </app-login-layout>
 
