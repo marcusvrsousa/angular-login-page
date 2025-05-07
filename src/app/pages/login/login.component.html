@@ -3,6 +3,7 @@
     primaryButtonText="Login Now"
     secondaryButtonText="Sign Up Now"
     (submit)="handleSubmit()"
+    (navigate)="handleNavigate()"
     [disablePrimaryButton]="!loginForm.valid"
 >
     <form [formGroup]="loginForm">

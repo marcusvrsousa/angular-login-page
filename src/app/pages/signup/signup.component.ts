@@ -5,55 +5,70 @@ import { PrimaryInputComponent } from '../../components/primary-input/primary-in
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { ToastrService } from 'ngx-toastr';
-interface LoginForm {
+
+interface SignupForm {
+  name: FormControl,
   email: FormControl,
   password: FormControl,
+  passwordConfirm: FormControl
 }
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-signup',
   imports: [
     LoginLayoutComponent, 
     ReactiveFormsModule,
     PrimaryInputComponent
   ],
   providers: [ LoginService ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  templateUrl: './signup.component.html',
+  styleUrl: './signup.component.scss'
 })
-export class LoginComponent {
+
+
+export class SingupComponent {
   
-  loginForm!: FormGroup<LoginForm>;
+  signupForm!: FormGroup<SignupForm>;
   
   constructor(private router: Router, private loginService: LoginService, private toast: ToastrService){
-    this.loginForm = new FormGroup({
+    this.signupForm = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(6)])
     })
   }
 
+  get nameControl(): FormControl {
+    return this.signupForm.get('name') as FormControl;
+  }
+  
   get emailControl(): FormControl {
-    return this.loginForm.get('email') as FormControl;
+    return this.signupForm.get('email') as FormControl;
   }
 
   get passwordControl(): FormControl {
-    return this.loginForm.get('password') as FormControl;
+    return this.signupForm.get('password') as FormControl;
+  }
+
+  get passwordConfirmControl(): FormControl {
+    return this.signupForm.get('passwordConfirm') as FormControl;
   }
 
   handleSubmit() {
-    if (this.loginForm.valid) {
-      this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
+    if (this.signupForm.valid) {
+      this.loginService.login(this.signupForm.value.email, this.signupForm.value.password).subscribe({
         next: () => this.toast.success("Login feito com sucesso"),
         error: () => this.toast.error("Erro inesperado. Tente novamente mais tarde!")
       })
     
     } else {
       console.log('Form is invalid');
-      this.loginForm.markAllAsTouched(); // mostra erros de validação
+      this.signupForm.markAllAsTouched(); // mostra erros de validação
     }
   }
 
   handleNavigate(){
-    this.router.navigate(['signup']);
+    this.router.navigate(['login']);
   }
 }

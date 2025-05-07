@@ -1,0 +1,50 @@
+<app-login-layout
+    title="Sign in and start today!"
+    primaryButtonText="Singup Now"
+    secondaryButtonText="Login Now"
+    (submit)="handleSubmit()"
+    (navigate)="handleNavigate()"
+    [disablePrimaryButton]="!signupForm.valid"
+>
+    <form [formGroup]="signupForm">
+        <app-primary-input
+            [control]="nameControl"
+            type="text"
+            label="Your name"
+            placeholder="John Doe"
+            inputName="name"
+        >
+         <img src="/assets/svg/email-icon.svg" alt="">
+
+        </app-primary-input>
+       <app-primary-input
+            [control]="emailControl"
+            type="email"
+            label="Your email"
+            placeholder="johndoe@gmail.com "
+            inputName="email"
+        >
+            <img src="/assets/svg/email-icon.svg" alt="">
+       </app-primary-input>
+
+       <app-primary-input
+            [control]="passwordControl"
+            type="password"
+            label="Your Password"
+            inputName="password"
+        >
+            <img src="/assets/svg/lock-icon.svg" alt="">
+       </app-primary-input>
+
+       <app-primary-input
+            [control]="passwordConfirmControl"
+            type="password"
+            label="Confirm Your Password"
+            inputName="passwordConfirm"
+        >
+            <img src="/assets/svg/lock-icon.svg" alt="">
+       </app-primary-input>
+      
+    </form>
+</app-login-layout>
+
